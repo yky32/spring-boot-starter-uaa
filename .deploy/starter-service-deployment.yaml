@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: starter-service-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: starter-service-app
+  template:
+    metadata:
+      labels:
+        app: starter-service-app
+    spec:
+      containers:
+        - name: starter-service-app
+          image: ecr/starter-service:latest  # plz choose the ecr path
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9000
+          resources:
+            requests:
+              cpu: 0.5
+              memory: 1Gi
+            limits:
+              cpu: 1
+              memory: 2Gi
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: db_password
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-cm
+                  key: db_username
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-cm
+                  key: db_url

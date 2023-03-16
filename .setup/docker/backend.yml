@@ -1,0 +1,41 @@
+version: '3'
+name: backend-service-and-db
+
+services:
+  backend-db:
+    container_name: backend-db
+    image: postgres:10.10-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=db_name
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT:-5435}:5432
+    networks:
+      - backend_network
+
+
+  starter-service:
+    container_name: starter-service
+    image: yky32/starter-service:latest
+    restart: always
+    environment:
+      - DB_URL=jdbc:postgresql://backend-db/db_name
+    ports:
+      - "9000:9000"
+    links:
+      - backend-db
+    depends_on:
+      - backend-db
+    networks:
+      - backend_network
+
+networks:
+  backend_network:
+    external: true
+
+volumes:
+  db_data:

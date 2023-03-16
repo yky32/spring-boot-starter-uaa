@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-cm
+  labels:
+    app: app-cm
+    env: sit
+data:
+  db_url: jdbc:mysql://xxx.com:3306/test?useSSL=false
+  db_username: xxxx
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+  labels:
+    app: app-secret
+    env: sit
+data:
+  db_password: YXhhMTIzNDU2
