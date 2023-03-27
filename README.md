@@ -53,3 +53,5 @@
 - service
 - usecase `optional`
 
+## Oauth2 Concept
+![oauth2-architecture.png](oauth2-architecture.png)
