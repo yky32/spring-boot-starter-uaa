@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
-import java.lang.reflect.Array;
 import java.security.KeyPair;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Arrays;
@@ -22,9 +21,9 @@ import java.util.Arrays;
  */
 @Configuration
 public class JwksConfig {
-    private static final String KEY_STORE_FILE = "jwk/bael-jwt.jks";
-    private static final String KEY_STORE_PASSWORD = "bael-pass";
-    private static final String KEY_ALIAS = "bael-oauth-jwt";
+    private static final String KEY_STORE_FILE_1 = "jwk/bael-jwt.jks";
+    private static final String KEY_STORE_PASSWORD_1 = "bael-pass";
+    private static final String KEY_ALIAS_1 = "bael-oauth-jwt";
     private static final String JWK_KID = "bael-key-id";
 
     private static final String KEY_STORE_FILE_2 = "jwk/rd-jwt.jks";
@@ -34,22 +33,22 @@ public class JwksConfig {
 
     @Bean
     public JWKSet jwkSet() {
-        RSAKey.Builder builder = new RSAKey.Builder((RSAPublicKey) keyPair().getPublic())
+        RSAKey.Builder key1 = new RSAKey.Builder((RSAPublicKey) keyPair1().getPublic())
                 .keyUse(KeyUse.SIGNATURE)
                 .algorithm(JWSAlgorithm.RS256)
                 .keyID(JWK_KID);
-        RSAKey.Builder builder2 = new RSAKey.Builder((RSAPublicKey) keyPair2().getPublic())
+        RSAKey.Builder key2 = new RSAKey.Builder((RSAPublicKey) keyPair2().getPublic())
                 .keyUse(KeyUse.SIGNATURE)
                 .algorithm(JWSAlgorithm.RS256)
                 .keyID(JWK_KID_2);
-        return new JWKSet(Arrays.asList(builder.build(), builder2.build()));
+        return new JWKSet(Arrays.asList(key1.build(), key2.build()));
     }
 
     @Bean
-    public KeyPair keyPair() {
-        ClassPathResource ksFile = new ClassPathResource(KEY_STORE_FILE);
-        KeyStoreKeyFactory ksFactory = new KeyStoreKeyFactory(ksFile, KEY_STORE_PASSWORD.toCharArray());
-        return ksFactory.getKeyPair(KEY_ALIAS);
+    public KeyPair keyPair1() {
+        ClassPathResource ksFile = new ClassPathResource(KEY_STORE_FILE_1);
+        KeyStoreKeyFactory ksFactory = new KeyStoreKeyFactory(ksFile, KEY_STORE_PASSWORD_1.toCharArray());
+        return ksFactory.getKeyPair(KEY_ALIAS_1);
     }
 
     @Bean
