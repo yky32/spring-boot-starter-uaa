@@ -14,13 +14,13 @@ import javax.persistence.*;
 @Entity
 @Table
 @Builder
-public class Test extends AuditEntity {
+public class User extends AuditEntity {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
-    private String test;
+    @Column
+    private String name;
 }

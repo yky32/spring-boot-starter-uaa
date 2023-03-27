@@ -5,14 +5,14 @@ spring:
   application:
     name: STARTER-SERVICE
   datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/test_db}
-    username: ${DB_USERNAME:test}
-    password: ${DB_PASSWORD:test}
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/test_db}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
         format_sql: true
     hibernate:
-      ddl-auto: none # TODO: disable this feature when in other environment
+      ddl-auto: none
     show-sql: true

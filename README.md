@@ -16,6 +16,8 @@
 - Flyway / LiquidBase
 - Spring Boot 2.6+
 - Spring Security
+  - oauth2-jose
+  - oauth2
 - Kubernetes
 
 # Maven Dependencies

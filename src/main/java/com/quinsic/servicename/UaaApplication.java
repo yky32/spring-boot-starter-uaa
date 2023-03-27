@@ -8,10 +8,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableJpaAuditing
 @EnableTransactionManagement
-public class StarterApplication {
+public class UaaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StarterApplication.class, args);
+		SpringApplication.run(UaaApplication.class, args);
 	}
 
 }
