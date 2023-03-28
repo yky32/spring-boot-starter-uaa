@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Slf4j
 @SecurityRequirement(name = "uaa-tokens-api")
-public class TokenEndpoint {
+public class TokensEndpoint {
     @PostMapping
     public Result<CreateTokenResponseDto> create(CreateTokenRequestDto requestDto) {
         return R.success(null);

@@ -1,9 +1,9 @@
 server:
-  port: 9000
+  port: 8088
 
 spring:
   application:
-    name: STARTER-SERVICE
+    name: USER-AUTHENTICATION-SERVER
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5433/test_db}
     username: ${DB_USERNAME:postgres}
