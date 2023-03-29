@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: starter-service-app
+  name: user-authentication-server-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: starter-service-app
+      app: user-authentication-server-app
   template:
     metadata:
       labels:
-        app: starter-service-app
+        app: user-authentication-server-app
     spec:
       containers:
-        - name: starter-service-app
-          image: ecr/starter-service:latest  # plz choose the ecr path
+        - name: user-authentication-server-app
+          image: ecr/user-authentication-server:latest  # plz choose the ecr path
           imagePullPolicy: Always
           ports:
             - containerPort: 9000

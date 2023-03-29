@@ -10,9 +10,9 @@
 	</parent>
 
 	<groupId>com.quinsic</groupId>
-	<artifactId>uaa</artifactId>
+	<artifactId>user-authentication-server</artifactId>
 	<version>0.0.1</version>
-	<name>starter</name>
+	<name>user-authentication-server</name>
 	<description>Starter Project for Microservice</description>
 
 	<properties>
