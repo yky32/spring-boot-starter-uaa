@@ -13,7 +13,7 @@
 	<artifactId>user-authentication-server</artifactId>
 	<version>0.0.1</version>
 	<name>user-authentication-server</name>
-	<description>Starter Project for Microservice</description>
+	<description>UAA Starter Project for Microservice</description>
 
 	<properties>
 		<java.version>11</java.version>
