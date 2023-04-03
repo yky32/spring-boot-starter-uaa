@@ -7,6 +7,11 @@ spec:
   selector:
     matchLabels:
       app: user-authentication-server-app
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3  # how many pods can be added in one time
+      maxUnavailable: 0  # how many pods can be unavailable during rolling update, if set as 0 = no downtime, also can be set as %
   template:
     metadata:
       labels:
@@ -14,7 +19,7 @@ spec:
     spec:
       containers:
         - name: user-authentication-server-app
-          image: ecr/user-authentication-server:latest  # plz choose the ecr path
+          image: yky32/user-authentication-server:latest  # plz choose the ecr path
           imagePullPolicy: Always
           ports:
             - containerPort: 9000
@@ -25,19 +30,34 @@ spec:
             limits:
               cpu: 1
               memory: 2Gi
-          env:
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: app-secret
-                  key: db_password
-            - name: DB_USERNAME
-              valueFrom:
-                configMapKeyRef:
-                  name: app-cm
-                  key: db_username
-            - name: DB_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: app-cm
-                  key: db_url
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 9000
+            initialDelaySeconds: 60
+            failureThreshold: 10
+            timeoutSeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 9000
+            initialDelaySeconds: 60
+            timeoutSeconds: 10
+            periodSeconds: 5
+#          env:
+#            - name: DB_PASSWORD
+#              valueFrom:
+#                secretKeyRef:
+#                  name: app-secret
+#                  key: db_password
+#            - name: DB_USERNAME
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: app-cm
+#                  key: db_username
+#            - name: DB_URL
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: app-cm
+#                  key: db_url
